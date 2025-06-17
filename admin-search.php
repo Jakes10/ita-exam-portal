@@ -488,7 +488,7 @@ session_start();
                     <ul class="list-unstyled navbar__list">
                         <li class="active">
                             <a href="#search">
-                                <i class="fas fa-search"></i>Search Records</a>
+                                <i class="fas fa-search"></i>Recipient Search</a>
                         </li>
                         <!-- <li>
                             <a href="#reports">
@@ -522,28 +522,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <nav class="navbar-mobile" id="mobileNav" style="display: none;">
-                    <div class="container-fluid">
-                        <ul class="navbar-mobile__list list-unstyled">
-                            <li>
-                                <a href="#search">
-                                    <i class="fas fa-search"></i>Search Records</a>
-                            </li>
-                            <!-- <li>
-                                <a href="#reports">
-                                    <i class="fas fa-chart-line"></i>Reports</a>
-                            </li>
-                            <li>
-                                <a href="#settings">
-                                    <i class="fas fa-cog"></i>Settings</a>
-                            </li> -->
-                            <li>
-                                <a href="logout.php">
-                                    <i class="fas fa-sign-out-alt"></i>Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+          
             </header>
             <!-- END HEADER MOBILE-->
 
@@ -558,26 +537,7 @@ session_start();
                                 </a>
                             </div>
                             <div class="header-button2">
-                                <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
-                                    <div class="notifi-dropdown js-dropdown">
-                                        <div class="notifi__title">
-                                            <p>Admin Notifications</p>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c1 img-cir img-40">
-                                                <i class="zmdi zmdi-account-box"></i>
-                                            </div>
-                                            <div class="content">
-                                                <p>New applicant registered</p>
-                                                <span class="date">Today</span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__footer">
-                                            <a href="#">All notifications</a>
-                                        </div>
-                                    </div>
-                                </div>
+                             
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">

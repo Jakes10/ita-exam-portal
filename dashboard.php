@@ -61,14 +61,15 @@ error_log('Session user data: ' . print_r($user, true));
             border-radius: 4px;
             margin-bottom: 2rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
         }
         
         .timer {
             font-size: 1.5rem;
             font-weight: bold;
             color: #dc3545;
+            margin-bottom: 0.5rem;
         }
         
         .question-container {
@@ -128,7 +129,8 @@ error_log('Session user data: ' . print_r($user, true));
         .question-number {
             font-size: 0.9rem;
             color: #6c757d;
-            margin-bottom: 0.5rem;
+            margin: 0;
+            font-weight: 500;
         }
         
         .warning-time {
@@ -138,6 +140,134 @@ error_log('Session user data: ' . print_r($user, true));
         
         @keyframes blink {
             50% { opacity: 0.5; }
+        }
+
+        /* Camera Integration Styles */
+        .camera-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 300px;
+            border: 2px solid #007bff;
+        }
+
+        .camera-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .camera-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #007bff;
+            margin: 0;
+        }
+
+        .camera-status {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .camera-status.active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .camera-status.inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .camera-video {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            background: #000;
+            object-fit: cover;
+        }
+
+        .camera-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+
+        .capture-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            z-index: 1001;
+        }
+
+        .capture-indicator.active {
+            display: flex;
+            animation: captureFlash 0.5s ease-out;
+        }
+
+        @keyframes captureFlash {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .camera-info {
+            font-size: 0.7rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .photo-count {
+            background: #007bff;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .camera-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile camera adjustments */
+        @media (max-width: 768px) {
+            .camera-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 1rem 0;
+                max-width: 100%;
+            }
+            
+            .camera-video {
+                height: 150px;
+            }
         }
 
         /* Mobile menu styles */
@@ -683,55 +813,24 @@ error_log('Session user data: ' . print_r($user, true));
                                 </a>
                             </div>
                             <div class="header-button2">
-<!--                                <div class="header-button-item js-item-menu">-->
-<!--                                    <i class="zmdi zmdi-search"></i>-->
-<!--                                    <div class="search-dropdown js-dropdown">-->
-<!--                                        <form action="">-->
-<!--                                            <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />-->
-<!--                                            <span class="search-dropdown__focus">-->
-<!--                                                <i class="zmdi zmdi-search"></i>-->
-<!--                                            </span>-->
-<!--                                        </form>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="header-button-item has-noti js-item-menu">-->
-<!--                                    <i class="zmdi zmdi-notifications"></i>-->
-<!--                                    <div class="notifi-dropdown js-dropdown">-->
-<!--                                        <div class="notifi__title">-->
-<!--                                            <p>You have 3 Notifications</p>-->
-<!--                                        </div>-->
-<!--                                        <div class="notifi__item">-->
-<!--                                            <div class="bg-c1 img-cir img-40">-->
-<!--                                                <i class="zmdi zmdi-email-open"></i>-->
-<!--                                            </div>-->
-<!--                                            <div class="content">-->
-<!--                                                <p>You got a email notification</p>-->
-<!--                                                <span class="date">April 12, 2018 06:50</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="notifi__item">-->
-<!--                                            <div class="bg-c2 img-cir img-40">-->
-<!--                                                <i class="zmdi zmdi-account-box"></i>-->
-<!--                                            </div>-->
-<!--                                            <div class="content">-->
-<!--                                                <p>Your account has been blocked</p>-->
-<!--                                                <span class="date">April 12, 2018 06:50</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="notifi__item">-->
-<!--                                            <div class="bg-c3 img-cir img-40">-->
-<!--                                                <i class="zmdi zmdi-file-text"></i>-->
-<!--                                            </div>-->
-<!--                                            <div class="content">-->
-<!--                                                <p>You got a new file</p>-->
-<!--                                                <span class="date">April 12, 2018 06:50</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="notifi__footer">-->
-<!--                                            <a href="#">All notifications</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                         
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img src="https://ui-avatars.com/api/?name=<?= $user['avatar_name'] ?>&color=7F9CF5&background=EBF4FF" alt="Applicant Avatar" />
+                                        </div>
+                            
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#"><?= htmlspecialchars($user['full_name']) ?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="fas fa-sign-out-alt"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -831,6 +930,10 @@ error_log('Session user data: ' . print_r($user, true));
     <script src="js/main.js"></script>
 
     <script>
+        // Global variable to store the test attempt ID (accessible to all functions)
+        let testAttemptId = null;
+        let lastPhotoTime = 0; // Track last photo capture time to prevent multiple captures
+        
         document.addEventListener('DOMContentLoaded', function() {
             const startExamBtn = document.getElementById('startExam');
             const examInstructions = document.querySelector('.exam-instructions');
@@ -842,7 +945,6 @@ error_log('Session user data: ' . print_r($user, true));
             let timeLeft = 20 * 60; // 20 minutes in seconds
             let timerInterval = null;
             let isExamSubmitted = false;
-            let testAttemptId = null; // Store the test attempt ID
 
             startExamBtn.addEventListener('click', async function() {
                 console.log('Start exam button clicked');
@@ -889,8 +991,10 @@ error_log('Session user data: ' . print_r($user, true));
                     console.log('API Response:', result);
 
                     if (response.ok && result.success) {
+                        // Save attempt ID globally for use in photo capturing
                         testAttemptId = result.attempt_id;
-                        console.log('Test attempt ID stored:', testAttemptId);
+                        console.log('Test attempt ID saved globally:', testAttemptId);
+                        console.log('Exam started successfully with attempt ID:', testAttemptId);
                         // You can show success message if needed
                         // alert(result.message || 'Test started successfully');
                     } else {
@@ -953,13 +1057,38 @@ error_log('Session user data: ' . print_r($user, true));
                 examContainer.appendChild(questionContainer);
                 examContainer.appendChild(navigationButtons);
                 
-                // Append exam container to exam content
+                // Add camera container
+                const cameraContainer = document.createElement('div');
+                cameraContainer.className = 'camera-container';
+                cameraContainer.id = 'cameraContainer';
+                cameraContainer.innerHTML = `
+                    <div class="camera-header">
+                        <h6 class="camera-title">📷 Proctoring Camera</h6>
+                        <span class="camera-status inactive" id="cameraStatus">Inactive</span>
+                    </div>
+                    <div style="position: relative;">
+                        <video id="cameraVideo" class="camera-video" autoplay muted playsinline></video>
+                        <div class="capture-indicator" id="captureIndicator">
+                            <i class="fas fa-camera fa-2x" style="color: #007bff;"></i>
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <small class="camera-info">Auto-capture every 10 seconds</small>
+                        <span class="photo-count" id="photoCount">0 photos</span>
+                    </div>
+                `;
+                
+                // Append exam container and camera to exam content
                 examContent.appendChild(examContainer);
+                examContent.appendChild(cameraContainer);
 
                 // Add event listeners for navigation buttons
                 document.getElementById('prevBtn').addEventListener('click', previousQuestion);
                 document.getElementById('nextBtn').addEventListener('click', nextQuestion);
                 document.getElementById('submitBtn').addEventListener('click', submitExam);
+                
+                // Initialize camera
+                initializeCamera();
                 
                 // Start the exam timer
                 startTimer();
@@ -1352,7 +1481,7 @@ error_log('Session user data: ' . print_r($user, true));
                 <div id="resultsModal" class="results-modal">
                     <div class="results-modal-content">
                         <div class="results-header ${isPass ? 'pass' : 'fail'}">
-                            <h2>${isPass ? '🎉 Congratulations!' : '📚 Keep Learning!'}</h2>
+                            <h2>${isPass ? '🎉 Congratulations!' : '📚 Sorry, Keep Trying!'}</h2>
                             <p class="status-text">${isPass ? 'You have passed the exam!' : 'You did not pass this time, but don\'t give up!'}</p>
                         </div>
                         
@@ -1450,6 +1579,268 @@ error_log('Session user data: ' . print_r($user, true));
                 if (!headerMobile.contains(event.target)) {
                     closeMobileMenu();
                 }
+            }
+        });
+
+        // Camera functionality variables
+        let stream = null;
+        let photoCount = 0;
+        let captureInterval = null;
+        let capturedPhotos = [];
+
+        // Initialize camera
+        async function initializeCamera() {
+            const video = document.getElementById('cameraVideo');
+            const status = document.getElementById('cameraStatus');
+            const container = document.getElementById('cameraContainer');
+
+            try {
+                console.log('Requesting camera access...');
+                
+                // Request camera access
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: 'user'
+                    },
+                    audio: false
+                });
+
+                // Set video source
+                video.srcObject = stream;
+                
+                // Update status
+                status.textContent = 'Active';
+                status.className = 'camera-status active';
+                
+                // Start periodic photo capture (every 2 minutes)
+                startPeriodicCapture();
+                
+                console.log('Camera initialized successfully');
+                showInfo('Camera access granted. Proctoring is now active for exam integrity.', 'Camera Active');
+
+            } catch (error) {
+                console.error('Camera access denied or failed:', error);
+                handleCameraError(error);
+            }
+        }
+
+        // Handle camera errors
+        function handleCameraError(error) {
+            const container = document.getElementById('cameraContainer');
+            const status = document.getElementById('cameraStatus');
+            
+            status.textContent = 'Error';
+            status.className = 'camera-status inactive';
+            
+            let errorMessage = 'Camera access failed. ';
+            if (error.name === 'NotAllowedError') {
+                errorMessage += 'Please grant camera permission and refresh the page to continue with the exam.';
+                showError('Camera permission is required for exam proctoring. Please allow camera access and refresh the page.', 'Camera Permission Required');
+            } else if (error.name === 'NotFoundError') {
+                errorMessage += 'No camera device found on this device.';
+                showWarning('No camera found. Please ensure your device has a working camera.', 'Camera Not Found');
+            } else if (error.name === 'NotReadableError') {
+                errorMessage += 'Camera is being used by another application.';
+                showWarning('Camera is already in use. Please close other applications using the camera.', 'Camera In Use');
+            } else {
+                errorMessage += 'Please check your camera settings and refresh the page.';
+                showError('Camera initialization failed. Please check your camera and try again.', 'Camera Error');
+            }
+            
+            container.innerHTML = `
+                <div class="camera-header">
+                    <h6 class="camera-title">📷 Proctoring Camera</h6>
+                    <span class="camera-status inactive">Error</span>
+                </div>
+                <div class="camera-error">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #dc3545; margin-bottom: 1rem;"></i>
+                    <p>${errorMessage}</p>
+                    <button onclick="location.reload()" class="btn btn-sm btn-primary">Retry</button>
+                </div>
+            `;
+        }
+
+        // Start periodic photo capture
+        function startPeriodicCapture() {
+            // Capture first photo after 10 seconds
+            setTimeout(() => {
+                capturePhoto();
+            }, 10000);
+            
+            // Then capture every 10 seconds (10000ms)
+            captureInterval = setInterval(() => {
+                capturePhoto();
+            }, 10000);
+            
+            console.log('Periodic photo capture started - first photo in 10 seconds, then every 10 seconds');
+        }
+
+        // Capture photo
+        function capturePhoto() {
+            const video = document.getElementById('cameraVideo');
+            const indicator = document.getElementById('captureIndicator');
+            const photoCountElement = document.getElementById('photoCount');
+            
+            if (!video || !video.srcObject) {
+                console.error('Video not available for capture');
+                return;
+            }
+
+            if (!testAttemptId) {
+                console.error('Test attempt ID not available yet');
+                return;
+            }
+
+            // Check if 10 seconds have passed since last photo
+            const currentTime = Date.now();
+            if (currentTime - lastPhotoTime < 10000) {
+                console.log('Photo capture blocked - 10 second interval not reached');
+                return;
+            }
+
+            try {
+                // Create canvas to capture frame
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                // Draw current video frame to canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Convert to blob
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        photoCount++;
+                        
+                        // Update last photo time
+                        lastPhotoTime = Date.now();
+                        
+                        // Create photo data
+                        const photoData = {
+                            timestamp: new Date().toISOString(),
+                            testAttemptId: testAttemptId,
+                            photoNumber: photoCount,
+                            blob: blob
+                        };
+                        
+                        capturedPhotos.push(photoData);
+                        
+                        // Update UI
+                        photoCountElement.textContent = `${photoCount} photo${photoCount !== 1 ? 's' : ''}`;
+                        
+                        // Show capture indicator
+                        indicator.classList.add('active');
+                        setTimeout(() => {
+                            indicator.classList.remove('active');
+                        }, 500);
+                        
+                        // Send photo to server
+                        sendPhotoToServer(photoData);
+                        
+                        console.log(`Photo ${photoCount} captured successfully at ${photoData.timestamp}`);
+                    }
+                }, 'image/jpeg', 0.8);
+                
+            } catch (error) {
+                console.error('Failed to capture photo:', error);
+            }
+        }
+
+        // Send photo to server
+        async function sendPhotoToServer(photoData) {
+            try {
+                // alert(photoData.testAttemptId);
+                const formData = new FormData();
+                formData.append('photo', photoData.blob, `exam_photo_${photoData.testAttemptId}_${photoData.photoNumber}.jpg`);
+                formData.append('test_attempt_id', photoData.testAttemptId);
+                formData.append('photo_number', photoData.photoNumber);
+                formData.append('timestamp', photoData.timestamp);
+                formData.append('trn', '<?= $_SESSION['user']['trn']?>');
+
+                // Log entire form data to console
+                console.log('Form Data being sent:');
+                for (let pair of formData.entries()) {
+                    if (pair[0] === 'photo') {
+                        console.log(pair[0] + ': [Blob object - size: ' + pair[1].size + ' bytes]');
+                    } else {
+                        console.log(pair[0] + ': ' + pair[1]);
+                    }
+                }
+
+                const response = await fetch('http://127.0.0.1:8000/api/test/capture-photo', {
+                    method: 'POST',
+                    body: formData,
+                    
+                });
+
+                if (response.ok) {
+                    console.log(`Photo ${photoData.photoNumber} uploaded successfully`);
+                } else {
+                    console.error(`Failed to upload photo ${photoData.photoNumber}:`, response.status);
+                }
+            } catch (error) {
+                console.error('Error uploading photo:', error);
+                // Store photo locally if upload fails
+                localStorage.setItem(`exam_photo_${photoData.photoNumber}`, JSON.stringify({
+                    timestamp: photoData.timestamp,
+                    testAttemptId: photoData.testAttemptId,
+                    photoNumber: photoData.photoNumber
+                }));
+            }
+        }
+
+        // Stop camera when exam ends
+        function stopCamera() {
+            console.log('Stopping camera and photo capture...');
+            
+            if (stream) {
+                stream.getTracks().forEach(track => {
+                    track.stop();
+                    console.log('Camera track stopped');
+                });
+                stream = null;
+            }
+            
+            if (captureInterval) {
+                clearInterval(captureInterval);
+                captureInterval = null;
+                console.log('Photo capture interval cleared');
+            }
+            
+            // Update UI
+            const status = document.getElementById('cameraStatus');
+            if (status) {
+                status.textContent = 'Stopped';
+                status.className = 'camera-status inactive';
+            }
+        }
+
+        // Enhanced submitExam function with camera cleanup
+        const originalSubmitExam = window.submitExam;
+        window.submitExam = async function() {
+            console.log('Exam submission started - stopping camera');
+            stopCamera();
+            
+            // Call original submit function
+            if (originalSubmitExam) {
+                return await originalSubmitExam.apply(this, arguments);
+            }
+        };
+
+        // Handle page unload to stop camera
+        window.addEventListener('beforeunload', function() {
+            stopCamera();
+        });
+
+        // Handle visibility change (tab switching)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                console.log('Page hidden - capturing photo for tab switch detection');
+                capturePhoto();
             }
         });
     </script>
